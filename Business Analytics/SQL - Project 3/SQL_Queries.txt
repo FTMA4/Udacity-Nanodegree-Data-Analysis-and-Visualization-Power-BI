@@ -1,0 +1,97 @@
+/* Query 1 - query used for first insight /
+  
+
+SELECT g.name, COUNT(*) as "Number of artists" 
+
+FROM genre g 
+
+JOIN track t 
+
+ON t.genreid=g.genreid 
+
+JOIN album a 
+
+ON t.albumid=a.albumid 
+
+join artist ar 
+
+ON ar.artistid=a.artistid 
+
+GROUP BY 1 
+
+ORDER BY 2 DESC 
+
+LIMIT 10 
+
+  
+
+  
+
+/* Query 2 - query used for second insight / 
+  
+
+SELECT a.title as "Album", COUNT(*) as "Number of tracks" 
+
+FROM  track t 
+
+JOIN album a 
+
+ON t.albumid=a.albumid 
+
+GROUP BY 1 
+
+ORDER BY 2 DESC 
+
+LIMIT 5 
+
+  
+
+/* Query 3 - query used for third insight / 
+  
+
+SELECT DATE_PART('year', i.invoicedate) as Year, SUM(t.bytes) as "Total bytes"
+
+FROM track t 
+
+JOIN invoiceline il 
+
+ON il.trackid=t.trackid 
+
+JOIN invoice i 
+
+ON il.invoiceid=i.invoiceid 
+
+GROUP BY 1 
+
+ORDER BY 1 
+
+  
+
+  
+
+/* Query 4 - query used for forth insight / 
+  
+
+SELECT i.customerid, SUM(unitprice) as "Total unit price (USD)" , 
+
+CASE WHEN SUM(unitprice) > 40 THEN 'above 40' 
+
+ELSE 'bellow 40' END AS "customer level"  
+
+FROM customer c 
+
+JOIN invoice i 
+
+ON c.customerid=i.customerid 
+
+JOIN invoiceline il 
+
+ON il.invoiceid=i.invoiceid 
+
+GROUP BY 1 
+
+ORDER BY 1 
+
+LIMIT 10 
+
+ 
